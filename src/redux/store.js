@@ -7,15 +7,15 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "persist-store",
-  storage,
+    key: "persist-store",
+    storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = createStore(
-  persistedReducer,
-  composeWithDevTools(applyMiddleware(thunk, logger))
+    persistedReducer,
+    composeWithDevTools(applyMiddleware(thunk, logger))
 );
 
 export const persistor = persistStore(store);

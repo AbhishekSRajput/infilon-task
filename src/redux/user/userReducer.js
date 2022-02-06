@@ -42,10 +42,9 @@ const userReducer = (state = initialState, action) => {
         ),
       };
     case USER_INFO:
-      let userInfo = state.user.filter((data) => data.id === action.payload);
       return {
         ...state,
-        singleUser: userInfo.length > 0 ? userInfo[0] : {},
+        singleUser: state.user.find((data) => data.id === action.payload),
       };
     case UPDATE_USER:
       console.log(state.singleUser);
