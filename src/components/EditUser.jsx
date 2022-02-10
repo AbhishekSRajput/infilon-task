@@ -13,8 +13,8 @@ class EditUser extends Component {
 
     this.state = {
       first_name: "",
-      email: "",
       last_name: "",
+      email: "",
     };
   }
 
@@ -23,9 +23,13 @@ class EditUser extends Component {
     this.props.getUserInfo(numId);
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(previousProps) {
     console.log(this.props.userData);
-    if (this.state.email === "") {
+
+    if (
+      previousProps.userData.singleUser.first_name !==
+      this.props.userData.singleUser.first_name
+    ) {
       const { first_name, last_name, email } = this.props.userData.singleUser;
       this.setState({
         first_name,
@@ -81,6 +85,7 @@ class EditUser extends Component {
             value={first_name}
             name="first_name"
             onChange={this.inputHandler}
+            required
           />
           <TextField
             type="text"
@@ -91,9 +96,10 @@ class EditUser extends Component {
             value={last_name}
             name="last_name"
             onChange={this.inputHandler}
+            required
           />
           <TextField
-            type="email"
+            type="text"
             id="outlined-basic"
             label="Email"
             variant="outlined"
@@ -101,7 +107,9 @@ class EditUser extends Component {
             value={email}
             name="email"
             onChange={this.inputHandler}
+            required
           />
+
           <Button
             style={{ width: "50%", margin: "0 auto" }}
             variant="outlined"
